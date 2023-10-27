@@ -17,5 +17,12 @@ FILE EXAMPLE
 _________________________
 hello = world   # spaces will be deleted, key-value pairs that non in defined section will be in section default
 @section
-hello=my deer void # section declares with @, key-value pair redifiniton are not supported,will cause undefined behavior,(expect key defined in other section),strings more than 256 symbols length will cause undefined behavior
+
+hello=my deer void # section declares with @
+
+#key-value pair redifiniton are not supported,will cause undefined behavior,(expect key defined in other section)
+
+#strings more than 256 symbols length will cause undefined behavior
+
+
 goodbye=world:(
