@@ -12,9 +12,7 @@ int loadConf(char* filename, conf_t * conf) - require preinitilized conf_t, read
 
 char* getKeyValue(conf_t* conf, char* section,char*key) - require conf_t with loaded file, will search in it for section "section" and in this section will search key-value pair by name, return string value, NULL if eror;
 
-!!!MULTI STRING NOT SUPPORT (KEY
-
- = VAL)!!!
+!!!MULTI STRING NOT SUPPORT (key-value pair where value or equals sigh are on other line)!!!
 
 
 _________________________
