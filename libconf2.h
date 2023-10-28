@@ -113,8 +113,10 @@ conf_t * loadConf(char* filename,conf_t * config)
        }
    }
 }
-char* getKeyValue(conf_t * config, char* section , char* key)     //search for key in section(first search section) then return value of key in string
- {
+char* getKeyValue(conf_t * config, char* ssection , char* key)     //search for key in section(first search section) then return value of key in string
+{
+   char* section = strdup(ssection);
+   removeChar(section,' ');
    confsect_t * Sstart = config->section;
    do{
     //printf("section to found :%s || real :%s || next :%s\n",section,config->section->name,config->section->next->name);
