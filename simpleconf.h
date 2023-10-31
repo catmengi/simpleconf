@@ -204,11 +204,11 @@ int confsectlen(conf_t* config)
 {
   int len = 0;
   if(!config)
-    return -1;
+    return 0;
   if(!config->section)
-    return -1;
+    return 0;
   if(!config->section->next)
-    return -1;
+    return 0;
   confsect_t* Sstart = config->section;
    do{
       len++;
@@ -220,10 +220,10 @@ int confsectlen(conf_t* config)
 char** getSections(conf_t * config)    //creates string array containing all sections in config;
 { 
   int len = confsectlen(config);
-  if(len == -1)
+  if(len == 0)
     return NULL;
   char** sectList = malloc(len * sizeof(char*));
-  if(!sectList){
+  if(sectList == NULL){
     perror("pre sectList malloc() failed\n");
      return NULL;
   }
@@ -325,15 +325,19 @@ int conffree(conf_t* config)                     //free almost all config (conf_
    char** sections = getSections(config);
    int sectlen = confsectlen(config);
    int entrylen;
+  // printf("STARTING CONF FREE\n");
    if(!sections)
    {
+     perror("gen sect!\n");
      return -1;
    }
+   //printf("generating sect pointers\n");
    confsect_t** sectptr = genSectPointers(config);
    if(!sectptr)
    {
      return -1;
    }
+   //printf("gen succefuly\n");
    confentry_t ** entryptr;
    for(int i = 0; i < sectlen; i++)
    {
@@ -345,21 +349,25 @@ int conffree(conf_t* config)                     //free almost all config (conf_
     }
     for(int j = 0; j < entrylen; j ++)
     {
+    //  printf("cleaning entry! %d\n",entrylen);
+    if(entryptr[j]->key != NULL)
      free(entryptr[j]->key);
-     if(entryptr[j]->value != NULL)
-         free(entryptr[j]->value);
+    if(entryptr[j]->value != NULL)
+     free(entryptr[j]->value);
+    if(entryptr[j] != NULL);
      free(entryptr[j]);
     }
-    free(entryptr);
+   // free(entryptr);
    entryskip:
-   if(sectptr[i]->name != NULL)
+  // printf("entering sectptr clean! %d\n",i);
+   if(sectptr[i]->name != NULL){
       free(sectptr[i]->name);
   }
+}
 //  free(entryptr);
   for(int i = 0; i < sectlen; i++)
   {
-    //printf("clearing section %s\n ",sectptr[i]->name);
-    free(sections[i]);
+    //printf("clearing section ptr! \n ");
     free(sectptr[i]);
   }
   free(sectptr);
