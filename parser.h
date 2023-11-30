@@ -24,6 +24,3 @@ struct config
 {
   _conf_sect_t* head;
 };
-//typedef struct raw_string_llist raw_str_llist_t;
-int rs_llist_parse(raw_str_llist_t*,struct config*);
-
