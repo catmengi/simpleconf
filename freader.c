@@ -11,6 +11,7 @@ struct raw_string_llist_e
 struct raw_string_llist
 {
   struct raw_string_llist_e * head;
+  struct raw_string_llist_e* cur;/*for get api*/
   int ecount;
 };
 struct raw_string_llist* rs_llist_create()
